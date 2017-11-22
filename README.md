@@ -12,7 +12,7 @@ I wondered why there were no open-source tools handling these tedious works. The
 These scripts convert original [Penn Treebank (PTB)](https://catalog.ldc.upenn.edu/ldc99t42) and [Chinese Treebank 5.1 (CTB)](https://catalog.ldc.upenn.edu/LDC2005T01) corpora into the conventional data setup from Chen and Manning (2014), Dyer et al. (2015). The detailed splits are:
 
 - **PTB** Training: 02-21. Development: 22. Test: 23.
-- **CTB** Training: 001–815, 1001–1136. Development: 886– 931, 1148–1151. Test: 816–885, 1137–1147.
+- **CTB** Training: 001–815, 1001–1136. Development: 886–931, 1148–1151. Test: 816–885, 1137–1147.
  
 Let's do it on the fly.
 
