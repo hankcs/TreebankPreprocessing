@@ -40,7 +40,7 @@ def combine_fids(fids, out_path):
         if isfile(join(ctb_in_nltk, f)):
             files.append(f)
     with open(out_path, 'w') as out:
-        combine_files(files, out, ctb, 'par')
+        combine_files(files, out, ctb, 'par', add_s=True)
 
 
 if __name__ == '__main__':

@@ -20,7 +20,7 @@ def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
 
-def combine_files(fids, out, tb, task):
+def combine_files(fids, out, tb, task, add_s=False):
     print('%d files...' % len(fids))
     total_sentence = 0
     for n, file in enumerate(fids):
@@ -29,7 +29,10 @@ def combine_files(fids, out, tb, task):
         sents = tb.parsed_sents(file)
         for s in sents:
             if task == 'par':
-                out.write(s.pformat(margin=sys.maxsize))
+                if add_s:
+                    out.write('(S {})'.format(s.pformat(margin=sys.maxsize)))
+                else:
+                    out.write(s.pformat(margin=sys.maxsize))
             elif task == 'pos':
                 for word_tag in s.pos():
                     out.write('{}\t{}\n'.format(*word_tag))
