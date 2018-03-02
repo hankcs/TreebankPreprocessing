@@ -30,7 +30,7 @@ def convert(ctb_root, out_root):
                 pass
 
 
-def combine_fids(fids, out_path):
+def combine_fids(fids, out_path, task):
     print('Generating ' + out_path)
     files = []
     for fid in fids:
@@ -40,7 +40,7 @@ def combine_fids(fids, out_path):
         if isfile(join(ctb_in_nltk, f)):
             files.append(f)
     with open(out_path, 'w') as out:
-        combine_files(files, out, ctb, 'par', add_s=True)
+        combine_files(files, out, ctb, task, add_s=True)
 
 
 if __name__ == '__main__':
@@ -49,6 +49,9 @@ if __name__ == '__main__':
                         help='The root path to Chinese Treebank 5.1')
     parser.add_argument("--output", required=True,
                         help='The folder where to store the output train.txt/dev.txt/test.txt')
+    parser.add_argument("--task", dest="task", default='par',
+                        help='Which task (par, pos)? Use par for phrase structure parsing, pos for part-of-speech '
+                             'tagging')
 
     args = parser.parse_args()
 
@@ -77,7 +80,16 @@ if __name__ == '__main__':
     development = list(range(886, 931 + 1)) + list(range(1148, 1151 + 1))
     test = list(range(816, 885 + 1)) + list(range(1137, 1147 + 1))
 
+    task = args.task
+    if task == 'par':
+        ext = 'txt'
+    elif task == 'pos':
+        ext = 'tsv'
+    else:
+        eprint('Invalid task {}'.format(task))
+        exit(1)
+
     root_path = args.output
-    combine_fids(training, join(root_path, 'train.txt'))
-    combine_fids(development, join(root_path, 'dev.txt'))
-    combine_fids(test, join(root_path, 'test.txt'))
+    combine_fids(training, join(root_path, 'train.{}'.format(ext)), task)
+    combine_fids(development, join(root_path, 'dev.{}'.format(ext)), task)
+    combine_fids(test, join(root_path, 'test.{}'.format(ext)), task)
