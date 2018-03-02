@@ -1,11 +1,6 @@
 # TreebankPreprocessing
 Python scripts preprocessing [Penn Treebank (PTB)](https://catalog.ldc.upenn.edu/ldc99t42) and [Chinese Treebank 5.1 (CTB)](https://catalog.ldc.upenn.edu/LDC2005T01). They can convert treebanks to:
 
-* constituency parse tree in `.txt` format, one line for one sentence.
-* dependency parse tree in `.conllx` format.
-* part-of-speech tagging corpus in `.tsv` format: first column for words, second column for tags, sentences separated by a blank line.
-
-
 | Corpus | Format | Description |
 | --- | --- | --- |
 | constituency parse tree | `.txt` | one line for one sentence |
