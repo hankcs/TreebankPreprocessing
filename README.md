@@ -5,7 +5,7 @@ Python scripts preprocessing [Penn Treebank (PTB)](https://catalog.ldc.upenn.edu
 | --- | --- | --- |
 | constituency parse tree | `.txt` | one line for one sentence |
 | dependency parse tree | `.conllx` | [Basic Stanford Dependencies (SD)](https://nlp.stanford.edu/software/stanford-dependencies.shtml) |
-| part-of-speech tagging corpus | `.tsv` | first column for words, second column for tags, sentences separated by a blank line. |
+| part-of-speech tagging corpus | `.tsv` | first column for words, second column for tags, sentences separated by a blank line |
 
  
 When designing a tagger or parser, preprocessing treebanks is a troublesome problem. We need to:
@@ -20,7 +20,7 @@ I wondered why there were no open-source tools handling these tedious works. Fin
 
 - Python3
 - NLTK
-- stanford-parser for converting dependency parsing and pos-tagging corpus
+- stanford-parser for converting to dependency parse trees
 
 ## Overview
 
