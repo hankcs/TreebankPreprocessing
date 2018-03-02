@@ -20,7 +20,7 @@ I wondered why there were no open-source tools handling these tedious works. Fin
 
 - Python3
 - NLTK
-- stanford-parser for converting to dependency parse trees
+- Optional stanford-parser for converting to dependency parse trees
 
 ## Overview
 
@@ -80,9 +80,9 @@ optional arguments:
   --task TASK      Which task (par, pos)? Use par for phrase structure
                    parsing, pos for part-of-speech tagging
 ```
-
-* If you want part-of-speech tagging corpora, simply append `--task pos`.
-* Then, conversion to dependency parse corpora can be done by `tb_to_stanford.py`:
+* You will get 3 `.txt` files corresponding to train/dev/test set.
+* If you want part-of-speech tagging corpora, simply append `--task pos`. This time, you get 3 `.tsv` files.
+* `.txt` files can be converted to `.conllx` files by `tb_to_stanford.py`:
 
 ```
 $ python3 tb_to_stanford.py --help
