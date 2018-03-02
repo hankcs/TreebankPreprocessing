@@ -26,7 +26,7 @@ I wondered why there were no open-source tools handling these tedious works. Fin
 
 What kind of task can we perform on treebanks?
 
-### Part-Of-Speech Tagging
+### Part-of-Speech Tagging
 
 As per Collins (2002) and Choi (2016), splits are:
 
@@ -120,7 +120,7 @@ optional arguments:
                    parsing, pos for part-of-speech tagging
 ```
 
-- Then pos and dependency parsing corpora can be converted similar to PTB.
+- Tagging and dependency parsing corpora can be obtained similar to PTB.
 
 Then you can start your research, enjoy it!
 
