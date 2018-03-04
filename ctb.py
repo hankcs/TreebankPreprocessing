@@ -43,6 +43,13 @@ def combine_fids(fids, out_path, task):
         combine_files(files, out, ctb, task, add_s=True)
 
 
+def find_nltk_data():
+    global ctb_in_nltk
+    for root in nltk.data.path:
+        if isdir(root):
+            ctb_in_nltk = root
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Combine Chinese Treebank 5.1 fid files into train/dev/test set')
     parser.add_argument("--ctb", required=True,
@@ -50,19 +57,17 @@ if __name__ == '__main__':
     parser.add_argument("--output", required=True,
                         help='The folder where to store the output train.txt/dev.txt/test.txt')
     parser.add_argument("--task", dest="task", default='par',
-                        help='Which task (par, pos)? Use par for phrase structure parsing, pos for part-of-speech '
-                             'tagging')
+                        help='Which task (seg, pos, par)? Use seg for word segmentation, pos for part-of-speech '
+                             'tagging, par for phrase structure parsing')
 
     args = parser.parse_args()
 
     ctb_in_nltk = None
-    for root in nltk.data.path:
-        if isdir(root):
-            ctb_in_nltk = root
+    find_nltk_data()
 
     if ctb_in_nltk is None:
-        eprint('You should run nltk.download(\'ptb\') to fetch some data first!')
-        exit(1)
+        nltk.download('ptb')
+        find_nltk_data()
 
     ctb_in_nltk = join(ctb_in_nltk, 'corpora')
     ctb_in_nltk = join(ctb_in_nltk, 'ctb')
@@ -76,20 +81,23 @@ if __name__ == '__main__':
         'ctb', BracketParseCorpusReader, r'chtb_.*\.fid',
         tagset='unknown')
 
-    training = list(range(1, 815 + 1)) + list(range(1001, 1136 + 1))
-    development = list(range(886, 931 + 1)) + list(range(1148, 1151 + 1))
-    test = list(range(816, 885 + 1)) + list(range(1137, 1147 + 1))
-
     task = args.task
     if task == 'par':
+        training = list(range(1, 815 + 1)) + list(range(1001, 1136 + 1))
+        development = list(range(886, 931 + 1)) + list(range(1148, 1151 + 1))
+        test = list(range(816, 885 + 1)) + list(range(1137, 1147 + 1))
         ext = 'txt'
-    elif task == 'pos':
+    elif task == 'seg' or task == 'pos':
+        training = list(range(1, 270 + 1)) + list(range(400, 1151 + 1))
+        development = list(range(301, 325 + 1))
+        test = list(range(271, 300 + 1))
         ext = 'tsv'
     else:
         eprint('Invalid task {}'.format(task))
         exit(1)
 
     root_path = args.output
+    make_sure_path_exists(root_path)
     combine_fids(training, join(root_path, 'train.{}'.format(ext)), task)
     combine_fids(development, join(root_path, 'dev.{}'.format(ext)), task)
     combine_fids(test, join(root_path, 'test.{}'.format(ext)), task)

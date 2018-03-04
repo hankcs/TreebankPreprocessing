@@ -34,8 +34,21 @@ def combine_files(fids, out, tb, task, add_s=False):
                 else:
                     out.write(s.pformat(margin=sys.maxsize))
             elif task == 'pos':
-                for word_tag in s.pos():
-                    out.write('{}\t{}\n'.format(*word_tag))
+                for word, tag in s.pos():
+                    if tag == '-NONE-':
+                        continue
+                    out.write('{}\t{}\n'.format(word, tag))
+            elif task == 'seg':
+                for word, tag in s.pos():
+                    if tag == '-NONE-':
+                        continue
+                    if len(word) == 1:
+                        out.write(word + "\tS\n")
+                    else:
+                        out.write(word[0] + "\tB\n")
+                        for w in word[1:len(word) - 1]:
+                            out.write(w + "\tM\n")
+                        out.write(word[len(word) - 1] + "\tE\n")
             else:
                 raise RuntimeError('Invalid task {}'.format(task))
             if n != len(fids) - 1:

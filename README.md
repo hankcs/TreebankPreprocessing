@@ -5,6 +5,7 @@ Python scripts preprocessing [Penn Treebank (PTB)](https://catalog.ldc.upenn.edu
 | --- | --- | --- |
 | constituency parse tree | `.txt` | one line for one sentence |
 | dependency parse tree | `.conllx` | [Basic Stanford Dependencies (SD)](https://nlp.stanford.edu/software/stanford-dependencies.shtml) |
+| Chinese word segmentation corpus | `.tsv` | first column for characters, second column for BMES tags, sentences separated by a blank line |
 | part-of-speech tagging corpus | `.tsv` | first column for words, second column for tags, sentences separated by a blank line |
 
  
@@ -26,11 +27,17 @@ I wondered why there were no open-source tools handling these tedious works. Fin
 
 What kind of task can we perform on treebanks?
 
+### Chinese Word Segmentation
+
+For CTB, segmentation corpus are split as per Jiang et al. (2009):
+
+- **CTB** Training: 001–270, 400–1151. Development: 301–325. Test: 271-300.
+
+
 ### Part-of-Speech Tagging
 
-As per Collins (2002) and Choi (2016), splits are:
-
-- **PTB** Training: 0-18. Development: 19-21. Test: 22-24.
+- **PTB** Training: 0-18. Development: 19-21. Test: 22-24. As per Collins (2002) and Choi (2016).
+- **CTB** The same with Chinese Word Segmentation.
  
 ### Phrase Structure Parsing
 These scripts can also convert treebanks into the conventional data setup from Chen and Manning (2014), Dyer et al. (2015). The detailed splits are:
