@@ -5,7 +5,7 @@ Python scripts preprocessing [Penn Treebank (PTB)](https://catalog.ldc.upenn.edu
 | --- | --- | --- |
 | constituency parse tree | `.txt` | one line for one sentence |
 | dependency parse tree | `.conllx` | [Basic Stanford Dependencies (SD)](https://nlp.stanford.edu/software/stanford-dependencies.shtml) |
-| Chinese word segmentation corpus | `.tsv` | first column for characters, second column for BMES tags, sentences separated by a blank line |
+| word segmentation corpus | `.tsv` | first column for characters, second column for BMES tags, sentences separated by a blank line |
 | part-of-speech tagging corpus | `.tsv` | first column for words, second column for tags, sentences separated by a blank line |
 
  
@@ -123,8 +123,9 @@ optional arguments:
   --ctb CTB        The root path to Chinese Treebank 5.1
   --output OUTPUT  The folder where to store the output
                    train.txt/dev.txt/test.txt
-  --task TASK      Which task (par, pos)? Use par for phrase structure
-                   parsing, pos for part-of-speech tagging
+  --task TASK      Which task (seg, pos, par)? Use seg for word segmentation,
+                   pos for part-of-speech tagging, par for phrase structure
+                   parsing
 ```
 
 - Tagging and dependency parsing corpora can be obtained similar to PTB.
