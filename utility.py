@@ -38,6 +38,11 @@ def combine_files(fids, out, tb, task, add_s=False):
                     if tag == '-NONE-':
                         continue
                     out.write('{}\t{}\n'.format(word, tag))
+            elif task == 'pos-pku':
+                for word, tag in s.pos():
+                    if tag == '-NONE-':
+                        continue
+                    out.write('{}/{} '.format(word, tag))
             elif task == 'seg':
                 for word, tag in s.pos():
                     if tag == '-NONE-':
@@ -51,8 +56,7 @@ def combine_files(fids, out, tb, task, add_s=False):
                         out.write(word[len(word) - 1] + "\tE\n")
             else:
                 raise RuntimeError('Invalid task {}'.format(task))
-            if n != len(fids) - 1:
-                out.write('\n')
+            out.write('\n')
             total_sentence += 1
     print()
     print('%d sentences.' % total_sentence)
