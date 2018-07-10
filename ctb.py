@@ -11,7 +11,7 @@ import nltk
 from utility import make_sure_path_exists, eprint, combine_files
 
 
-def convert(ctb_root, out_root):
+def convert_ctb5_to_backeted(ctb_root, out_root):
     ctb_root = join(ctb_root, 'bracketed')
     fids = [f for f in listdir(ctb_root) if isfile(join(ctb_root, f)) and f.endswith('.fid')]
     make_sure_path_exists(out_root)
@@ -27,6 +27,7 @@ def convert(ctb_root, out_root):
                     elif in_s_tag:
                         out.write(line)
             except:
+                # The last file throws encoding error at the very end, doesn't affect sentences.
                 pass
 
 
@@ -73,7 +74,7 @@ if __name__ == '__main__':
     ctb_in_nltk = join(ctb_in_nltk, 'ctb')
 
     print('Converting CTB: removing xml tags...')
-    convert(args.ctb, ctb_in_nltk)
+    convert_ctb5_to_backeted(args.ctb, ctb_in_nltk)
     print('Importing to nltk...\n')
     from nltk.corpus import BracketParseCorpusReader, LazyCorpusLoader
 
