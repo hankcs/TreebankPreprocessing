@@ -15,7 +15,7 @@ def convert_ctb8_to_bracketed(ctb_root, out_root):
     chtbs = [f for f in listdir(ctb_root) if isfile(join(ctb_root, f)) and f.startswith('chtb')]
     make_sure_path_exists(out_root)
     for f in chtbs:
-        with open(join(ctb_root, f), encoding='utf-8') as src, open(join(out_root, f + '.txt'), 'w') as out:
+        with open(join(ctb_root, f), encoding='utf-8') as src, open(join(out_root, f + '.txt'), 'w', encoding='utf-8') as out:
             for line in src:
                 if not line.startswith('<'):
                     out.write(line)
@@ -45,7 +45,7 @@ def combine_fids(fids, out_path, task):
     for f in fids:
         if isfile(join(ctb_in_nltk, f)):
             files.append(f)
-    with open(out_path, 'w') as out:
+    with open(out_path, 'w', encoding='utf-8') as out:
         combine_files(files, out, ctb, task, add_s=True)
 
 
